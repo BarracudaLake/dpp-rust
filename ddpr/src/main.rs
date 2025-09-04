@@ -223,7 +223,7 @@ async fn download_file(path: impl AsRef<Path>) -> impl IntoResponse {
 fn check_config() -> Result<Configuration, Box<dyn std::error::Error>> {
     let content = fs::read_to_string("/etc/dpp/config.toml")?;
 
-    Ok(toml::from_str(&content)?)
+    Ok(toml::from_str(&content)?) // hi
 }
 
 fn check_slist() -> Result<ServerList, Box<dyn std::error::Error>> {
