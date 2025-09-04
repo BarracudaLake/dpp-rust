@@ -1,0 +1,10 @@
+[package]
+name = "dpsc"
+version = "0.1.0"
+edition = "2024"
+description = "Command line interface for ddpr"
+
+[dependencies]
+clap = { version = "4.5.46", features = ["derive"] }
+serde = { version = "1.0.219", features = ["derive"] }
+toml = "0.9.5"
