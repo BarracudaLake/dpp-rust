@@ -4,11 +4,11 @@
 //     Newest,    Set
 //     2.0.25
 //
-const VERSION: &str = env!("CARGO_PKG_VERSION");
-const ADDRESS: &str = "127.0.0.1:8487"; // use constants for now, remake as CLI later TODO
+static VERSION: &str = env!("CARGO_PKG_VERSION");
+static ADDRESS: &str = "127.0.0.1:8487"; // use constants for now, remake as CLI later TODO
 
 // these versions are hard-coded, theres no need to currently make them dynamic
-const SUPPORTED_VERSIONS: Vec<&str> = vec![VERSION];
+static SUPPORTED_VERSIONS: [&'static str; 1] = ["1.0"];
 
 use std::fs;
 use std::fs::OpenOptions;
@@ -144,9 +144,12 @@ async fn root() -> impl IntoResponse {
     (StatusCode::BAD_REQUEST, "This route does not exist as it is considered invalid on DPP");
 }
 
-async fn init(State(state): AppState, body: String) -> impl IntoResponse {
-    let data = match toml::from_str(&*body) : INITVersionDataRequest {
-        Ok(configuration) => configuration,
+async fn init(
+    State(state): State<AppState>,
+    body: String
+) -> impl IntoResponse {
+    let data : INITVersionDataRequest = match toml::from_str(&*body) {
+        Ok(d) => d,
         Err(_) => {
             return (StatusCode::BAD_REQUEST, "This route does not exist as it is considered invalid on DPP");
         }
@@ -154,7 +157,7 @@ async fn init(State(state): AppState, body: String) -> impl IntoResponse {
 
     // Lets compare versions!
 
-
+    (StatusCode::BAD_REQUEST, "idk")
 }
 
 

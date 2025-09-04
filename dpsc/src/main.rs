@@ -101,7 +101,7 @@ fn check_config() -> Result<Configuration, Box<dyn std::error::Error>> {
         default
 
     } else {
-        match toml::from_str(&content) : Configuration {
+        match toml::from_str(&content) {
             Ok(configuration) => configuration,
             Err(_) => {
                 let default = Configuration::default();
